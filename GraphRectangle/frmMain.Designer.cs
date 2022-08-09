@@ -35,6 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.nud_RecX2 = new System.Windows.Forms.NumericUpDown();
             this.pnl_Command = new System.Windows.Forms.Panel();
+            this.btnValidate = new System.Windows.Forms.Button();
             this.nud_RecX = new System.Windows.Forms.NumericUpDown();
             this.nud_RecY = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
@@ -59,10 +60,10 @@
             // 
             // txtErrorMessage
             // 
-            this.txtErrorMessage.Location = new System.Drawing.Point(11, 174);
+            this.txtErrorMessage.Location = new System.Drawing.Point(11, 210);
             this.txtErrorMessage.Multiline = true;
             this.txtErrorMessage.Name = "txtErrorMessage";
-            this.txtErrorMessage.Size = new System.Drawing.Size(260, 388);
+            this.txtErrorMessage.Size = new System.Drawing.Size(260, 352);
             this.txtErrorMessage.TabIndex = 15;
             // 
             // label6
@@ -102,6 +103,7 @@
             // 
             // pnl_Command
             // 
+            this.pnl_Command.Controls.Add(this.btnValidate);
             this.pnl_Command.Controls.Add(this.nud_RecX);
             this.pnl_Command.Controls.Add(this.label6);
             this.pnl_Command.Controls.Add(this.button1);
@@ -114,8 +116,18 @@
             this.pnl_Command.Enabled = false;
             this.pnl_Command.Location = new System.Drawing.Point(12, 56);
             this.pnl_Command.Name = "pnl_Command";
-            this.pnl_Command.Size = new System.Drawing.Size(259, 112);
+            this.pnl_Command.Size = new System.Drawing.Size(259, 135);
             this.pnl_Command.TabIndex = 14;
+            // 
+            // btnValidate
+            // 
+            this.btnValidate.Location = new System.Drawing.Point(59, 100);
+            this.btnValidate.Name = "btnValidate";
+            this.btnValidate.Size = new System.Drawing.Size(111, 23);
+            this.btnValidate.TabIndex = 6;
+            this.btnValidate.Text = "Validate";
+            this.btnValidate.UseVisualStyleBackColor = true;
+            this.btnValidate.Click += new System.EventHandler(this.btnValidate_Click);
             // 
             // nud_RecX
             // 
@@ -260,5 +272,6 @@
         private Button btn_BuildGrap;
         private Panel pnl_DrawingBoard;
         private BindingSource graphServiceBindingSource;
+        private Button btnValidate;
     }
 }

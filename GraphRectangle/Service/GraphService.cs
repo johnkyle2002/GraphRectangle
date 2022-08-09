@@ -25,12 +25,13 @@ namespace GraphRectangle.Service
             _height = height;
             _width = width;
             _errorMessage = errorMessage;
+            RectangleList = new List<RectangleModel>();
             GenerateGraph(width, height);
         }
 
         public bool isValid()
         {
-            return !(_width < 5 || _width > 25 || _height < 5 || _height > 25);            
+            return !(_width < 5 || _width > 25 || _height < 5 || _height > 25);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace GraphRectangle.Service
         public void GenerateGraph(int x, int y)
         {
             if (!isValid())
-            {                
+            {
                 _errorMessage.Text += _errorMessage.Text + "X and Y axis should be greater than 5 and less than 25 points" + Environment.NewLine;
                 return;
             }
@@ -57,7 +58,7 @@ namespace GraphRectangle.Service
         /// <param name="maxHeight">max width</param>
         private void DrawXAxisGraph(int x, int maxHeight)
         {
-            if (x < 5 || x > 20)
+            if (x < 5 || x > 25)
                 _errorMessage.Text += _errorMessage.Text + "X axis should be greater than 5 and less than 25 points" + Environment.NewLine;
 
             for (int count = 1; count <= x; count++)
@@ -77,7 +78,7 @@ namespace GraphRectangle.Service
         private void DrawYAxisGraph(int maxWidth, int y)
         {
             if (y < 5 || y > 25)
-                _errorMessage.Text += _errorMessage.Text + "Y axis should be greater than 5 and less than 25 points" + Environment.NewLine;
+                _errorMessage.Text += "Y axis should be greater than 5 and less than 25 points" + Environment.NewLine;
 
             for (int count = 1; count <= y; count++)
             {
@@ -99,11 +100,11 @@ namespace GraphRectangle.Service
         public void AddRectangle(int pointX, int pointY, int width, int height)
         {
             if (ValidateRectangle(pointX, pointY, width, height))
-            { 
+            {
                 return;
             }
 
-            RectangleList.Add(new RectangleModel { PointX = pointX, PointY = pointY });
+            RectangleList.Add(new RectangleModel { PointX = pointX, PointY = pointY, Height = height, Width = width });
 
             pointX = pointX * spacer + startingPoint;
             pointY = pointY * spacer;
@@ -116,23 +117,20 @@ namespace GraphRectangle.Service
         private bool ValidateRectangle(int pointX, int pointY, int width, int height)
         {
             var invalid = false;
-            
-            if(pointX == 0 || pointY == 0)
+
+            if (pointX == 0 || pointY == 0 || width == 0 || height == 0)
             {
-                _errorMessage.Text += _errorMessage.Text + "X and Y should not be equal to zero." + Environment.NewLine;
+                _errorMessage.Text += "X, Y, width and height should not be equal to zero." + Environment.NewLine;
                 invalid = true;
             }
-            
+
             if (RectangleList.Any(a => a.PointX == pointX && a.PointY == pointY && a.Width == width && a.Height == height))
             {
-                _errorMessage.Text += _errorMessage.Text + "Rectangle already exists." + Environment.NewLine;
+                _errorMessage.Text += "Rectangle already exists." + Environment.NewLine;
                 invalid = true;
             }
 
-            
             return invalid;
-            //if(pointX == pointY )
-
         }
 
         /// <summary>
@@ -153,6 +151,40 @@ namespace GraphRectangle.Service
         {
             Random random = new Random();
             return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
+        }
+
+        public void ValidateRectangles()
+        {
+            var tempList = RectangleList.AsEnumerable();
+
+            foreach (var item in RectangleList)
+            {
+                var temp = tempList.Where(w => w != item);
+                var pointB = item.PointX + item.Width;
+                var pointC = item.PointX + item.Height;
+                var pointD = pointC + item.Width;
+                item.Conflict = temp.Any(a => IsPointValid(item, a.PointX) ||
+                    IsPointValid(item, pointB) ||
+                    IsPointValid(item, pointC) ||
+                    IsPointValid(item, pointD));
+            }
+            if (RectangleList.Any(a => a.Conflict))
+                _errorMessage.Text += "Invalid rectangle input." + Environment.NewLine;
+        }
+
+        private bool IsPointValid(RectangleModel current, int dot)
+        {
+            // let point A be current.PointX
+            var pointB = current.PointX + current.Width;
+            var pointC = current.PointX + current.Height;
+            var pointD = pointC + current.Width;
+
+            var result = ((current.PointX <= dot && pointB >= dot) &&
+                (current.PointX > dot && pointC < dot) &&
+                (pointC < dot && pointD > dot) &&
+                (pointB > dot && pointD < dot));
+
+            return result;
         }
 
         protected virtual void Dispose(bool disposing)

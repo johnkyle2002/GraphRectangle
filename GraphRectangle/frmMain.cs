@@ -43,5 +43,10 @@ namespace GraphRectangle
         {
             graph.AddRectangle((int)nud_RecX.Value, (int)nud_RecY.Value, (int)nud_RecX2.Value, (int)nud_RecY2.Value);
         }
+
+        private void btnValidate_Click(object sender, EventArgs e)
+        {
+            graph.ValidateRectangles();
+        }
     }
 }
