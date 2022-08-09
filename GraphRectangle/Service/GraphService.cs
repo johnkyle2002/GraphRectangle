@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GraphRectangle.Service
 {
-    public class GraphService : IDisposable
+    public class GraphService : IDisposable, IGraphService
     {
         private const int spacer = 20;
         private const int startingPoint = 20;
@@ -26,7 +26,7 @@ namespace GraphRectangle.Service
             _width = width;
             _errorMessage = errorMessage;
             RectangleList = new List<RectangleModel>();
-            GenerateGraph(width, height);
+            GenerateGrid(width, height);
         }
 
         public bool isValid()
@@ -39,7 +39,7 @@ namespace GraphRectangle.Service
         /// </summary>
         /// <param name="x">x axis</param>
         /// <param name="y">y axis</param>
-        public void GenerateGraph(int x, int y)
+        public void GenerateGrid(int x, int y)
         {
             if (!isValid())
             {
@@ -49,6 +49,8 @@ namespace GraphRectangle.Service
 
             DrawXAxisGraph(x, y);
             DrawYAxisGraph(x, y);
+            _errorMessage.Text +=  "Grid created" + Environment.NewLine;
+
         }
 
         /// <summary>
@@ -114,11 +116,19 @@ namespace GraphRectangle.Service
             DrawRectangle(pointX, pointY, width, height);
         }
 
+        /// <summary>
+        /// Validate value of width and height and if already exists
+        /// </summary>
+        /// <param name="pointX"></param>
+        /// <param name="pointY"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
         private bool ValidateRectangle(int pointX, int pointY, int width, int height)
         {
             var invalid = false;
 
-            if ( width == 0 || height == 0)
+            if (width == 0 || height == 0)
             {
                 _errorMessage.Text += "Width and height should not be equal to zero." + Environment.NewLine;
                 invalid = true;
@@ -147,12 +157,19 @@ namespace GraphRectangle.Service
             _graphics.DrawRectangle(blackPen, rect);
         }
 
+        /// <summary>
+        /// Generate random color for rectangle
+        /// </summary>
+        /// <returns></returns>
         private Color GetRandomColor()
         {
             Random random = new Random();
             return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
         }
 
+        /// <summary>
+        /// Validate the list of Rectangle if has invalid input
+        /// </summary>
         public void ValidateRectangles()
         {
             var tempList = RectangleList.AsEnumerable();
@@ -176,6 +193,12 @@ namespace GraphRectangle.Service
                 _errorMessage.Text += "Valid rectangle input." + Environment.NewLine;
         }
 
+        /// <summary>
+        /// To check if the point is inside the other rectangle
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="dot"></param>
+        /// <returns></returns>
         private bool IsPointValid(RectangleModel current, int dot)
         {
             // let point A be current.PointX
@@ -192,12 +215,17 @@ namespace GraphRectangle.Service
             return true;
         }
 
+        /// <summary>
+        /// Check if the rectangle is outside of grid
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
         private bool IsOutOfGraph(RectangleModel current)
         {
             var result = (current.PointX <= 0 || current.PointX > _width ||
              current.PointY <= 0 || current.PointY > _height ||
              current.XWidth > _width || current.YHieght > _height);
-            if(result)
+            if (result)
                 _errorMessage.Text += "Extend beyond the grid." + Environment.NewLine;
             return result;
         }

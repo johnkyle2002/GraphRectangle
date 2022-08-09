@@ -255,6 +255,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_BuildGrap);
             this.Controls.Add(this.pnl_DrawingBoard);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmMain";
             this.Text = "frmMain";
             this.Load += new System.EventHandler(this.frmMain_Load);
