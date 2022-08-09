@@ -118,9 +118,9 @@ namespace GraphRectangle.Service
         {
             var invalid = false;
 
-            if (pointX == 0 || pointY == 0 || width == 0 || height == 0)
+            if ( width == 0 || height == 0)
             {
-                _errorMessage.Text += "X, Y, width and height should not be equal to zero." + Environment.NewLine;
+                _errorMessage.Text += "Width and height should not be equal to zero." + Environment.NewLine;
                 invalid = true;
             }
 
@@ -163,13 +163,17 @@ namespace GraphRectangle.Service
                 var pointB = item.PointX + item.Width;
                 var pointC = item.PointX + item.Height;
                 var pointD = pointC + item.Width;
-                item.Conflict = temp.Any(a => IsPointValid(item, a.PointX) ||
-                    IsPointValid(item, pointB) ||
-                    IsPointValid(item, pointC) ||
-                    IsPointValid(item, pointD));
+                item.Conflict = temp.Any(a =>
+                    IsPointValid(item, a.PointX) ||
+                    IsPointValid(item, a.PointY) ||
+                    IsPointValid(item, a.PointX + a.Width) ||
+                    IsPointValid(item, a.PointX + a.Height)) ||
+                    IsOutOfGraph(item);
             }
             if (RectangleList.Any(a => a.Conflict))
                 _errorMessage.Text += "Invalid rectangle input." + Environment.NewLine;
+            else
+                _errorMessage.Text += "Valid rectangle input." + Environment.NewLine;
         }
 
         private bool IsPointValid(RectangleModel current, int dot)
@@ -177,13 +181,24 @@ namespace GraphRectangle.Service
             // let point A be current.PointX
             var pointB = current.PointX + current.Width;
             var pointC = current.PointX + current.Height;
-            var pointD = pointC + current.Width;
 
-            var result = ((current.PointX <= dot && pointB >= dot) &&
-                (current.PointX > dot && pointC < dot) &&
-                (pointC < dot && pointD > dot) &&
-                (pointB > dot && pointD < dot));
+            if ((current.PointX < dot && pointB > dot) ||
+                (current.PointX < dot && pointC > dot) ||
+                (pointC < dot && pointB > dot))
+                return false;
 
+
+
+            return true;
+        }
+
+        private bool IsOutOfGraph(RectangleModel current)
+        {
+            var result = (current.PointX <= 0 || current.PointX > _width ||
+             current.PointY <= 0 || current.PointY > _height ||
+             current.XWidth > _width || current.YHieght > _height);
+            if(result)
+                _errorMessage.Text += "Extend beyond the grid." + Environment.NewLine;
             return result;
         }
 

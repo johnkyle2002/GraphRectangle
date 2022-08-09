@@ -97,6 +97,11 @@
             // nud_RecX2
             // 
             this.nud_RecX2.Location = new System.Drawing.Point(48, 42);
+            this.nud_RecX2.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            -2147483648});
             this.nud_RecX2.Name = "nud_RecX2";
             this.nud_RecX2.Size = new System.Drawing.Size(55, 23);
             this.nud_RecX2.TabIndex = 4;
@@ -132,6 +137,11 @@
             // nud_RecX
             // 
             this.nud_RecX.Location = new System.Drawing.Point(48, 13);
+            this.nud_RecX.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            -2147483648});
             this.nud_RecX.Name = "nud_RecX";
             this.nud_RecX.Size = new System.Drawing.Size(55, 23);
             this.nud_RecX.TabIndex = 4;
@@ -139,6 +149,11 @@
             // nud_RecY
             // 
             this.nud_RecY.Location = new System.Drawing.Point(162, 13);
+            this.nud_RecY.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            -2147483648});
             this.nud_RecY.Name = "nud_RecY";
             this.nud_RecY.Size = new System.Drawing.Size(55, 23);
             this.nud_RecY.TabIndex = 4;
@@ -155,6 +170,11 @@
             // nud_RecY2
             // 
             this.nud_RecY2.Location = new System.Drawing.Point(162, 42);
+            this.nud_RecY2.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            -2147483648});
             this.nud_RecY2.Name = "nud_RecY2";
             this.nud_RecY2.Size = new System.Drawing.Size(55, 23);
             this.nud_RecY2.TabIndex = 4;
