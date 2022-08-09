@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GraphRectangle.Service
 {
-    public class GraphService:IDisposable
+    public class GraphService : IDisposable
     {
         private readonly Graphics _graphics;
         private readonly int _height;
@@ -19,6 +19,7 @@ namespace GraphRectangle.Service
             _graphics = graphics;
             _height = height;
             _width = width;
+            GenerateGraph(width, height);
         }
 
         /// <summary>
@@ -28,17 +29,18 @@ namespace GraphRectangle.Service
         /// <param name="y">y axis</param>
         public void GenerateGraph(int x, int y)
         {
-
+            DrawXAxisGraph(x, y);
+            DrawYAxisGraph(x, y);
         }
 
         /// <summary>
-        /// Draw a line graph
+        /// Draw a x axis line graph
         /// </summary>
         /// <param name="x">x axis</param>
-        /// <param name="maxWidth">max width</param>
-        public void DrawXAxisGraph(int x, int maxWidth)
+        /// <param name="maxHeight">max width</param>
+        public void DrawXAxisGraph(int x, int maxHeight)
         {
-            if ((x < 5 || x > 2) && maxWidth <= x - 5 || maxWidth > 5)
+            if (x < 5 || x > 20)
                 _errorMessage = "X axis should be greater than 5 and less than 25 points" + Environment.NewLine;
 
             for (int count = 1; count < x; count++)
@@ -47,6 +49,25 @@ namespace GraphRectangle.Service
                 var endOfX = count * 20;
                 _graphics.DrawString(count.ToString(), new Font(FontFamily.GenericSerif, 12), Brushes.Black, new Point(pointX - 5, 0));
                 _graphics.DrawLine(new Pen(Color.Red, 1), new Point(pointX, 20), new Point(pointX, endOfX));
+            }
+        }
+
+        /// <summary>
+        /// Draw a y axis line graph
+        /// </summary>
+        /// <param name="maxWidth">max width</param>
+        /// <param name="y">y axis</param>
+        private void DrawYAxisGraph(int maxWidth, int y)
+        {
+            if (y < 5 || y > 25)
+                _errorMessage = "Y axis should be greater than 5 and less than 25 points" + Environment.NewLine;
+
+            for (int count = 1; count <= y; count++)
+            {
+                var pointY = count * 20;
+                var endOfY = maxWidth * 20 + 20;
+                _graphics.DrawString(count.ToString(), new Font(FontFamily.GenericSerif, 12), Brushes.Black, new Point(15, pointY - 10));
+                _graphics.DrawLine(new Pen(Color.Red, 1), new Point(40, pointY), new Point(endOfY, pointY));
             }
         }
 
