@@ -28,6 +28,11 @@ namespace GraphRectangle.Service
             GenerateGraph(width, height);
         }
 
+        public bool isValid()
+        {
+            return !(_width < 5 || _width > 25 || _height < 5 || _height > 25);            
+        }
+
         /// <summary>
         /// Generate X and Y axis line graph
         /// </summary>
@@ -35,8 +40,8 @@ namespace GraphRectangle.Service
         /// <param name="y">y axis</param>
         public void GenerateGraph(int x, int y)
         {
-            if (x < 5 || x > 25 || y < 5 || y > 25)
-            {
+            if (!isValid())
+            {                
                 _errorMessage.Text += _errorMessage.Text + "X and Y axis should be greater than 5 and less than 25 points" + Environment.NewLine;
                 return;
             }
@@ -94,23 +99,40 @@ namespace GraphRectangle.Service
         public void AddRectangle(int pointX, int pointY, int width, int height)
         {
             if (ValidateRectangle(pointX, pointY, width, height))
-            {
-                _errorMessage.Text += _errorMessage.Text + "Rectangle already exists." + Environment.NewLine;
+            { 
                 return;
             }
+
+            RectangleList.Add(new RectangleModel { PointX = pointX, PointY = pointY });
 
             pointX = pointX * spacer + startingPoint;
             pointY = pointY * spacer;
             width = width * spacer;
             height = height * spacer;
 
-            RectangleList.Add(new RectangleModel { PointX = pointX, PointY = pointY });
             DrawRectangle(pointX, pointY, width, height);
         }
 
         private bool ValidateRectangle(int pointX, int pointY, int width, int height)
         {
-            return RectangleList.Any(a => a.PointX == pointX && a.PointY == pointY && a.Width == width && a.Height == height);
+            var invalid = false;
+            
+            if(pointX == 0 || pointY == 0)
+            {
+                _errorMessage.Text += _errorMessage.Text + "X and Y should not be equal to zero." + Environment.NewLine;
+                invalid = true;
+            }
+            
+            if (RectangleList.Any(a => a.PointX == pointX && a.PointY == pointY && a.Width == width && a.Height == height))
+            {
+                _errorMessage.Text += _errorMessage.Text + "Rectangle already exists." + Environment.NewLine;
+                invalid = true;
+            }
+
+            
+            return invalid;
+            //if(pointX == pointY )
+
         }
 
         /// <summary>

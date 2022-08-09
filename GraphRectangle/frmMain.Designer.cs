@@ -70,9 +70,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(113, 46);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(23, 15);
+            this.label6.Size = new System.Drawing.Size(43, 15);
             this.label6.TabIndex = 5;
-            this.label6.Text = "Y2:";
+            this.label6.Text = "Height";
             // 
             // button1
             // 
@@ -87,7 +87,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(119, 17);
+            this.label4.Location = new System.Drawing.Point(139, 17);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(17, 15);
             this.label4.TabIndex = 5;
@@ -112,9 +112,9 @@
             this.pnl_Command.Controls.Add(this.nud_RecY2);
             this.pnl_Command.Controls.Add(this.label3);
             this.pnl_Command.Enabled = false;
-            this.pnl_Command.Location = new System.Drawing.Point(34, 56);
+            this.pnl_Command.Location = new System.Drawing.Point(12, 56);
             this.pnl_Command.Name = "pnl_Command";
-            this.pnl_Command.Size = new System.Drawing.Size(218, 112);
+            this.pnl_Command.Size = new System.Drawing.Size(259, 112);
             this.pnl_Command.TabIndex = 14;
             // 
             // nud_RecX
@@ -126,7 +126,7 @@
             // 
             // nud_RecY
             // 
-            this.nud_RecY.Location = new System.Drawing.Point(142, 13);
+            this.nud_RecY.Location = new System.Drawing.Point(162, 13);
             this.nud_RecY.Name = "nud_RecY";
             this.nud_RecY.Size = new System.Drawing.Size(55, 23);
             this.nud_RecY.TabIndex = 4;
@@ -134,15 +134,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 46);
+            this.label5.Location = new System.Drawing.Point(3, 46);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(23, 15);
+            this.label5.Size = new System.Drawing.Size(42, 15);
             this.label5.TabIndex = 5;
-            this.label5.Text = "X2:";
+            this.label5.Text = "Width:";
             // 
             // nud_RecY2
             // 
-            this.nud_RecY2.Location = new System.Drawing.Point(142, 42);
+            this.nud_RecY2.Location = new System.Drawing.Point(162, 42);
             this.nud_RecY2.Name = "nud_RecY2";
             this.nud_RecY2.Size = new System.Drawing.Size(55, 23);
             this.nud_RecY2.TabIndex = 4;
