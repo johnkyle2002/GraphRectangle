@@ -33,8 +33,8 @@ namespace GraphRectangle
                 await Task.Delay(300);
             }
 
-            pnl_Command.Enabled = false;
-            graph = new GraphService(pnl_DrawingBoard.CreateGraphics(), Convert.ToInt32(nud_PointX.Value), Convert.ToInt32(nud_PointY.Value));
+            pnl_Command.Enabled = true;
+            graph = new GraphService(pnl_DrawingBoard.CreateGraphics(), Convert.ToInt32(nud_PointX.Value), Convert.ToInt32(nud_PointY.Value), txtErrorMessage);
         }
     }
 }

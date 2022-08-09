@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphRectangle.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,12 @@ namespace GraphRectangle.Service
         private readonly Graphics _graphics;
         private readonly int _height;
         private readonly int _width;
-        private readonly TextBox _errorMessage; 
+        private readonly TextBox _errorMessage;
         private bool _disposedValue;
+        private List<RectangleModel> RectangleList = new List<RectangleModel>();
 
-        public GraphService(Graphics graphics, int height, int width, TextBox errorMessage)
+
+        public GraphService(Graphics graphics, int width, int height, TextBox errorMessage)
         {
             _graphics = graphics;
             _height = height;
@@ -32,6 +35,12 @@ namespace GraphRectangle.Service
         /// <param name="y">y axis</param>
         public void GenerateGraph(int x, int y)
         {
+            if (x < 5 || x > 25 || y < 5 || y > 25)
+            {
+                _errorMessage.Text += _errorMessage.Text + "X and Y axis should be greater than 5 and less than 25 points" + Environment.NewLine;
+                return;
+            }
+
             DrawXAxisGraph(x, y);
             DrawYAxisGraph(x, y);
         }
@@ -41,7 +50,7 @@ namespace GraphRectangle.Service
         /// </summary>
         /// <param name="x">x axis</param>
         /// <param name="maxHeight">max width</param>
-        public void DrawXAxisGraph(int x, int maxHeight)
+        private void DrawXAxisGraph(int x, int maxHeight)
         {
             if (x < 5 || x > 20)
                 _errorMessage.Text += _errorMessage.Text + "X axis should be greater than 5 and less than 25 points" + Environment.NewLine;
@@ -72,6 +81,47 @@ namespace GraphRectangle.Service
                 _graphics.DrawString(count.ToString(), new Font(FontFamily.GenericSerif, 12), Brushes.Black, new Point(15, pointY - 10));
                 _graphics.DrawLine(new Pen(Color.Red, 1), new Point(40, pointY), new Point(endOfY, pointY));
             }
+        }
+
+
+        /// <summary>
+        /// Add rectangle 
+        /// </summary>
+        /// <param name="pointX">X axis starting point</param>
+        /// <param name="pointY">Y Axis ending point</param>
+        /// <param name="width">rectangle width</param>
+        /// <param name="height">rectangle height</param>
+        private void AddRectangle(int pointX, int pointY, int width, int height)
+        {
+            //if (pointX >= pointY )
+            //    throw new ArgumentOutOfRangeException("Point x must not be less than or equal to point y.");
+            pointX = pointX * spacer + startingPoint;
+            pointY = pointY * spacer;
+            width = width * spacer;
+            height = height * spacer;
+            RectangleList.Add(new RectangleModel { PointX = pointX, PointY = pointY });
+            DrawRectangle(pointX, pointY, width, height);
+        }
+
+        /// <summary>
+        /// Draw rectangle 
+        /// </summary>
+        /// <param name="pointX">X axis starting point</param>
+        /// <param name="pointY">Y Axis ending point</param>
+        /// <param name="width">rectangle width</param>
+        /// <param name="height">rectangle height</param>
+        public void DrawRectangle(int pointX, int pointY, int width, int height)
+        {
+            Pen blackPen = new Pen(GetRandomColor(), 3);
+
+            Rectangle rect = new Rectangle(pointX, pointY, width, height);
+            _graphics.DrawRectangle(blackPen, rect);
+        }
+
+        private Color GetRandomColor()
+        {
+            Random random = new Random();
+            return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
         }
 
         protected virtual void Dispose(bool disposing)

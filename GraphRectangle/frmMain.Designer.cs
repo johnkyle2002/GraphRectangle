@@ -96,7 +96,7 @@
             this.nud_RecX2.Size = new System.Drawing.Size(55, 23);
             this.nud_RecX2.TabIndex = 4;
             // 
-            // panel2
+            // pnl_Command
             // 
             this.pnl_Command.Controls.Add(this.nud_RecX);
             this.pnl_Command.Controls.Add(this.label6);
@@ -109,7 +109,7 @@
             this.pnl_Command.Controls.Add(this.label3);
             this.pnl_Command.Enabled = false;
             this.pnl_Command.Location = new System.Drawing.Point(34, 56);
-            this.pnl_Command.Name = "panel2";
+            this.pnl_Command.Name = "pnl_Command";
             this.pnl_Command.Size = new System.Drawing.Size(218, 112);
             this.pnl_Command.TabIndex = 14;
             // 
@@ -194,11 +194,11 @@
             this.btn_BuildGrap.UseVisualStyleBackColor = true;
             this.btn_BuildGrap.Click += new System.EventHandler(this.btn_BuildGrap_Click);
             // 
-            // panel1
+            // pnl_DrawingBoard
             // 
             this.pnl_DrawingBoard.BackColor = System.Drawing.Color.White;
             this.pnl_DrawingBoard.Location = new System.Drawing.Point(279, 12);
-            this.pnl_DrawingBoard.Name = "panel1";
+            this.pnl_DrawingBoard.Name = "pnl_DrawingBoard";
             this.pnl_DrawingBoard.Size = new System.Drawing.Size(550, 550);
             this.pnl_DrawingBoard.TabIndex = 8;
             // 
