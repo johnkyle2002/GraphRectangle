@@ -93,14 +93,24 @@ namespace GraphRectangle.Service
         /// <param name="height">rectangle height</param>
         public void AddRectangle(int pointX, int pointY, int width, int height)
         {
-            //if (pointX >= pointY )
-            //    throw new ArgumentOutOfRangeException("Point x must not be less than or equal to point y.");
+            if (ValidateRectangle(pointX, pointY, width, height))
+            {
+                _errorMessage.Text += _errorMessage.Text + "Rectangle already exists." + Environment.NewLine;
+                return;
+            }
+
             pointX = pointX * spacer + startingPoint;
             pointY = pointY * spacer;
             width = width * spacer;
             height = height * spacer;
+
             RectangleList.Add(new RectangleModel { PointX = pointX, PointY = pointY });
             DrawRectangle(pointX, pointY, width, height);
+        }
+
+        private bool ValidateRectangle(int pointX, int pointY, int width, int height)
+        {
+            return RectangleList.Any(a => a.PointX == pointX && a.PointY == pointY && a.Width == width && a.Height == height);
         }
 
         /// <summary>
@@ -113,7 +123,6 @@ namespace GraphRectangle.Service
         private void DrawRectangle(int pointX, int pointY, int width, int height)
         {
             Pen blackPen = new Pen(GetRandomColor(), 3);
-
             Rectangle rect = new Rectangle(pointX, pointY, width, height);
             _graphics.DrawRectangle(blackPen, rect);
         }

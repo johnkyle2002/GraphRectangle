@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtErrorMessage = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btn_BuildGrap = new System.Windows.Forms.Button();
             this.pnl_DrawingBoard = new System.Windows.Forms.Panel();
+            this.graphServiceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nud_RecX2)).BeginInit();
             this.pnl_Command.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_RecX)).BeginInit();
@@ -52,14 +54,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_RecY2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_PointY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_PointX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphServiceBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // txtErrorMessage
             // 
-            this.txtErrorMessage.Location = new System.Drawing.Point(11, 189);
+            this.txtErrorMessage.Location = new System.Drawing.Point(11, 174);
             this.txtErrorMessage.Multiline = true;
             this.txtErrorMessage.Name = "txtErrorMessage";
-            this.txtErrorMessage.Size = new System.Drawing.Size(260, 373);
+            this.txtErrorMessage.Size = new System.Drawing.Size(260, 388);
             this.txtErrorMessage.TabIndex = 15;
             // 
             // label6
@@ -203,6 +206,10 @@
             this.pnl_DrawingBoard.Size = new System.Drawing.Size(550, 550);
             this.pnl_DrawingBoard.TabIndex = 8;
             // 
+            // graphServiceBindingSource
+            // 
+            this.graphServiceBindingSource.DataSource = typeof(GraphRectangle.Service.GraphService);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -227,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_RecY2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_PointY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_PointX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphServiceBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,5 +259,6 @@
         private Label label2;
         private Button btn_BuildGrap;
         private Panel pnl_DrawingBoard;
+        private BindingSource graphServiceBindingSource;
     }
 }

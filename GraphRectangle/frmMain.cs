@@ -1,4 +1,5 @@
-﻿using GraphRectangle.Service;
+﻿using GraphRectangle.Data;
+using GraphRectangle.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace GraphRectangle
 {
     public partial class frmMain : Form
     {
+        public List<RectangleModel> RectangleList = new List<RectangleModel>();
         GraphService graph;
         public frmMain()
         {
