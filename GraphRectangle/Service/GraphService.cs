@@ -91,7 +91,7 @@ namespace GraphRectangle.Service
         /// <param name="pointY">Y Axis ending point</param>
         /// <param name="width">rectangle width</param>
         /// <param name="height">rectangle height</param>
-        private void AddRectangle(int pointX, int pointY, int width, int height)
+        public void AddRectangle(int pointX, int pointY, int width, int height)
         {
             //if (pointX >= pointY )
             //    throw new ArgumentOutOfRangeException("Point x must not be less than or equal to point y.");
@@ -110,7 +110,7 @@ namespace GraphRectangle.Service
         /// <param name="pointY">Y Axis ending point</param>
         /// <param name="width">rectangle width</param>
         /// <param name="height">rectangle height</param>
-        public void DrawRectangle(int pointX, int pointY, int width, int height)
+        private void DrawRectangle(int pointX, int pointY, int width, int height)
         {
             Pen blackPen = new Pen(GetRandomColor(), 3);
 

@@ -36,5 +36,10 @@ namespace GraphRectangle
             pnl_Command.Enabled = true;
             graph = new GraphService(pnl_DrawingBoard.CreateGraphics(), Convert.ToInt32(nud_PointX.Value), Convert.ToInt32(nud_PointY.Value), txtErrorMessage);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            graph.AddRectangle((int)nud_RecX.Value, (int)nud_RecY.Value, (int)nud_RecX2.Value, (int)nud_RecY2.Value);
+        }
     }
 }
