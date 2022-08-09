@@ -181,10 +181,10 @@ namespace GraphRectangle.Service
                 var pointC = item.PointX + item.Height;
                 var pointD = pointC + item.Width;
                 item.Conflict = temp.Any(a =>
-                    IsPointValid(item, a.PointX) ||
-                    IsPointValid(item, a.PointY) ||
-                    IsPointValid(item, a.PointX + a.Width) ||
-                    IsPointValid(item, a.PointX + a.Height)) ||
+                    IsPointInValid(item, a.PointX) ||
+                    IsPointInValid(item, a.PointY) ||
+                    IsPointInValid(item, a.PointX + a.Width) ||
+                    IsPointInValid(item, a.PointX + a.Height)) ||
                     IsOutOfGraph(item);
             }
             if (RectangleList.Any(a => a.Conflict))
@@ -199,7 +199,7 @@ namespace GraphRectangle.Service
         /// <param name="current"></param>
         /// <param name="dot"></param>
         /// <returns></returns>
-        private bool IsPointValid(RectangleModel current, int dot)
+        private bool IsPointInValid(RectangleModel current, int dot)
         {
             // let point A be current.PointX
             var pointB = current.PointX + current.Width;
@@ -208,11 +208,9 @@ namespace GraphRectangle.Service
             if ((current.PointX < dot && pointB > dot) ||
                 (current.PointX < dot && pointC > dot) ||
                 (pointC < dot && pointB > dot))
-                return false;
-
-
-
-            return true;
+                return true;
+             
+            return false;
         }
 
         /// <summary>
